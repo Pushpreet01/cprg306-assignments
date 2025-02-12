@@ -2,10 +2,10 @@ import Link from "next/link"
 
 export default function Page() {
     return (
-      <main>
-        <h1>CPRG 306: Web Development 2 - Assignments</h1>
-        <Link href={"week-2"}>Week 2 Assignment</Link>
-        <Link href={"week-3"}>Week 3 Assignment</Link>
+      <main className="text-slate-200">
+        <h1 className="font-bold text-3xl">CPRG 306: Web Development 2 - Assignments</h1>
+        <p><Link href={"week-2"}>Week 2 Assignment</Link></p>
+        <p><Link href={"week-3"}>Week 3 Assignment</Link></p>
       </main>
     );
 }
