@@ -2,9 +2,8 @@
 
 import { useState } from 'react';
 import Item from './item';
-import items from './items.json';
 
-export default function ItemList() {
+export default function ItemList({ items }) {
   const [sortBy, setSortBy] = useState('name');
 
   const sortedItems = [...items].sort((a, b) => {
@@ -18,9 +17,9 @@ export default function ItemList() {
 
   return (
     <div>
-      <div className="mb-4">
+      <div class="pt-5 pb-2 flex items-center justify-center">
         <button
-          className={`mr-2 py-2 px-4 rounded-xl text-white ${sortBy === 'name' ? 'bg-blue-700' : 'bg-blue-600'}`}
+          className={`align mr-2 py-2 px-4 rounded-xl text-white ${sortBy === 'name' ? 'bg-blue-700' : 'bg-blue-600'}`}
           onClick={() => setSortBy('name')}
         >
           Sort by Name
