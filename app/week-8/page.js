@@ -1,27 +1,39 @@
+// /week-8/page.js
 "use client";
 
-import React from 'react';
-import NewItem from './new-item';
-import ItemList from './item-list';
-import items from './items.json';
-import { useState } from 'react';
+import React, { useState } from "react";
+import NewItem from "./new-item";
+import ItemList from "./item-list";
+import MealIdeas from "./meal-ideas";
+import items from "./items.json";
 
-function Page() {
-    const [itemsList, setItemsList] = useState(items);
+export default function Page() {
+  const [itemsList, setItemsList] = useState(items);
+  const [selectedItemName, setSelectedItemName] = useState("");
 
-    const HandleAddItem = (item) => {
-        setItemsList([...itemsList, item]);
-        console.log(itemsList);
-    };
+  const handleAddItem = (item) => {
+    setItemsList([...itemsList, item]);
+  };
 
-  return ( 
+  const handleItemSelect = (item) => {
+    // Clean up item name (remove size, emojis, etc.)
+    let cleanedName = item.name
+      .split(",")[0] // Remove size (e.g., "1 kg")
+      .trim() // Remove extra spaces
+      .replace(/[\u{1F300}-\u{1F9FF}]/gu, ""); // Remove emojis
+    setSelectedItemName(cleanedName);
+  };
 
-    <div className="m-5">
+  return (
+    <div className="m-5 flex flex-col lg:flex-row gap-8">
+      <div className="flex-1">
         <h1 className="text-center text-3xl font-bold mb-8 text-white">Shopping List</h1>
-      <NewItem onAddItem={HandleAddItem}/>
-      <ItemList items={itemsList} />
+        <NewItem onAddItem={handleAddItem} />
+        <ItemList items={itemsList} onItemSelect={handleItemSelect} />
+      </div>
+      <div className="flex-1">
+        <MealIdeas ingredient={selectedItemName} />
+      </div>
     </div>
   );
 }
-
-export default Page;
